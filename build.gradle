@@ -1,0 +1,81 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.4.1'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'lee'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	implementation 'org.springframework.security:spring-security-config'
+
+	implementation 'io.github.cdimascio:dotenv-java:3.1.0'//dotenv 추가
+
+
+	// Querydsl 의존성
+	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+	annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
+	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+
+	// JWT
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+	//OAuth
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	implementation 'org.springframework.security:spring-security-oauth2-client'
+	implementation 'org.springframework.security:spring-security-oauth2-jose'  // JWT 처리에 필요
+
+	//JWT 직접 생성 및 처리
+	implementation 'com.auth0:java-jwt:4.4.0'
+//	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+//	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+//	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+//	implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
+//	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
+//	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6' // JSON 처리용
+	implementation 'io.jsonwebtoken:jjwt:0.12.6'
+
+	//redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation "org.springframework.boot:spring-boot-starter-cache"
+	implementation 'org.redisson:redisson-spring-boot-starter:3.25.2'
+
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
