@@ -35,20 +35,19 @@ public class CartInquiryService {
                         .author(cartItem.getBook().getAuthor())
                         .quantity(cartItem.getQuantity())
                         .price(cartItem.getPrice())
+                        .totalPrice(cartItem.getPrice() * cartItem.getQuantity())
                         .build())
                 .collect(Collectors.toList());
     }
 
     /**
      * 전체 결제 금액
-     * @param userKey
      * @param cartDtoList
      * @return
      */
-    public int calcTotalPrice(String userKey, List<CartDto> cartDtoList) {
-        Cart cart = cartService.findCart(userKey);
-        return cart.getCartItems().stream()
-                .mapToInt(cartItem -> cartItem.getPrice() * cartItem.getQuantity())
+    public int calcTotalPrice(List<CartDto> cartDtoList) {
+        return cartDtoList.stream()
+                .mapToInt(CartDto::getTotalPrice)
                 .sum();
     }
 }

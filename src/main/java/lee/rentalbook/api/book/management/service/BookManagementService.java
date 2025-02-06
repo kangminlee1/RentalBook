@@ -52,20 +52,20 @@ public class BookManagementService {
         findBookDetails.modifyBookDetails(bookDetailsDto);
     }
 
-    /**
-     * 책 삭제
-     * @param userRoles
-     * @param bookDetailsId
-     */
-    @Transactional
-    public void deleteBook(UserRoles userRoles, Long bookDetailsId) {
-        //관리자인지 확인
-
-        //책이 존재하는 지 확인
-        BookDetails findBookDetails = bookService.findBook(bookDetailsId);
-
-        //관련된 값들 삭제 및 해당 책을 장바구니에 담은 사람에게는 값이 사라져야함
-        //book까지는 CASCADE해도 될듯
-        bookDetailsRepository.delete(findBookDetails);
-    }
+//    /**
+//     * 책 삭제
+//     * @param userRoles
+//     * @param bookDetailsId
+//     */
+//    @Transactional
+//    public void deleteBook(UserRoles userRoles, Long bookDetailsId) {
+//        //관리자인지 확인
+//
+//        //책이 존재하는 지 확인
+//        BookDetails findBookDetails = bookService.findBook(bookDetailsId);
+//
+//        //관련된 값들 삭제 및 해당 책을 장바구니에 담은 사람에게는 값이 사라져야함
+//        //book까지는 CASCADE해도 될듯
+//        bookDetailsRepository.delete(findBookDetails);
+//    }
 }

@@ -128,12 +128,11 @@ public class BookInquiryService {
     /**
      * 사용자가 반납한 책 조회
      * @param userKey
-     * @param rentalId
      * @param page
      * @param size
      * @return
      */
-    public Page<BookDto> returnedRentalBookList(String userKey, Long rentalId, int page, int size) {
+    public Page<BookDto> returnedRentalBookList(String userKey, int page, int size) {
         //본인 확인
         userService.findByUserKey(userKey);
         //본인이 반납한 책들인지 확인 -> 반닙일 존재하면 반납한 책 -> 조건은 반납 한 것들

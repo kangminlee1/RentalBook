@@ -36,11 +36,10 @@ public class AccountService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final UserService userService;
 
-
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email)
-                .orElseThrow(() -> new CustomException(USER_NOT_EXISTS));
-    }
+//    public User findByEmail(String email) {
+//        return userRepository.findByEmail(email)
+//                .orElseThrow(() -> new CustomException(USER_NOT_EXISTS));
+//    }
 
     public Map<String, Boolean> isEmailExists(String email) {
         Map<String, Boolean> duplicateEmail = new HashMap<>();
@@ -63,22 +62,22 @@ public class AccountService {
         userRepository.save(register);
     }
 
-    /**
-     * 회원탈퇴
-     * @param withdrawDto
-     */
-    public void withdraw(WithdrawDto withdrawDto) {
-        User user = findByEmail(withdrawDto.getEmail());
-        userRepository.delete(user);//임시 -> 사용자 관련된 정보 다 삭제하고 수량도 원래대로 돌려야함
-    }
+//    /**
+//     * 회원탈퇴
+//     * @param withdrawDto
+//     */
+//    public void withdraw(WithdrawDto withdrawDto) {
+//        User user = findByEmail(withdrawDto.getEmail());
+//        userRepository.delete(user);//임시 -> 사용자 관련된 정보 다 삭제하고 수량도 원래대로 돌려야함
+//    }
 
     /**
      * 사용자 상세정보 조회
-     * @param email
+     * @param userKey
      * @return
      */
-    public ProfileDto getProfile(String email) {
-        User findUser = findByEmail(email);
+    public ProfileDto getProfile(String userKey) {
+        User findUser = userService.findByUserKey(userKey);
         return ProfileDto.builder()
                 .name(findUser.getName())
                 .address(findUser.getUserDetails().getAddress())
@@ -88,11 +87,11 @@ public class AccountService {
 
     /**
      * 사용자 상세 정보 수정
-     * @param email
+     * @param userKey
      * @param profileDto
      */
-    public void modifyProfile(String email, ProfileDto profileDto) {
-        User findUser = findByEmail(email);
+    public void modifyProfile(String userKey, ProfileDto profileDto) {
+        User findUser = userService.findByUserKey(userKey);
         //사용자 검증 후
         findUser.getUserDetails().modify(profileDto);
     }

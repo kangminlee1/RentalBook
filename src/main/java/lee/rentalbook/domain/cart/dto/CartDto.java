@@ -11,4 +11,5 @@ public class CartDto {
     private String author;
     private int price;
     private int quantity;
+    private int totalPrice;
 }
