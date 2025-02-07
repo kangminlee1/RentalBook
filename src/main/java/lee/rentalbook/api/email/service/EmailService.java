@@ -13,4 +13,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class EmailService {
     //배송 상태 알림 -> 이메일
+    //Redis 추가로 공부하고 하자
+
+
 }
